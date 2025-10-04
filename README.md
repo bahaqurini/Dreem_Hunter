@@ -1,9 +1,31 @@
-Small Sample for use kmp to work on all OS and was too
+# Dreem_Hunter
 
-there online try for code how its work on web on real hosting
-https://www.ps-on-line.com/dreemhanter/
+## 📱 نظرة عامة | Overview
+تطبيق متعدد المنصات يتيح للمستخدمين تتبع وتحليل أحلامهم بسهولة، مع واجهة مستخدم بسيطة وتقنيات حديثة.  
+A cross-platform app that allows users to track and analyze their dreams easily, with a simple interface and modern technologies.
 
-99% of code share 
-code fix support Arabic language on web
-and use ViewMode on KMP
+---
+
+## 🛠️ التقنيات المستخدمة | Tech Stack
+- Kotlin Multiplatform Mobile (KMP)  
+- Jetpack Compose  
+- ViewModel  
+- Firebase  
+
+---
+
+## 🚀 كيفية التشغيل | How to Run
+1. استنساخ المستودع | Clone the repository  
+2. فتح المشروع في Android Studio | Open the project in Android Studio  
+3. تشغيل التطبيق على المحاكي أو الجهاز الحقيقي | Run the app on emulator or real device  
+
+---
+
+## 📸 لقطات الشاشة | Screenshots
+![واجهة المستخدم | UI](رابط_الصورة_هنا)  
+
+---
+
+## 🌐 تجربة مباشرة | Live Demo
+[رابط التطبيق المباشر](رابط_التجربة_هنا)
 
