@@ -22,10 +22,10 @@ A cross-platform app that allows users to track and analyze their dreams easily,
 ---
 
 ## 📸 لقطات الشاشة | Screenshots
-![واجهة المستخدم | UI]([رابط_الصورة_هنا](https://www.ps-on-line.com/dreemhanter/screenshot.png))  
+![واجهة المستخدم | UI]([https://www.ps-on-line.com/dreemhanter/screenshot.png](https://www.ps-on-line.com/dreemhanter/screenshot.png))  
 
 ---
 
 ## 🌐 تجربة مباشرة | Live Demo
-[رابط التطبيق المباشر]([رابط_التجربة_هنا](https://www.ps-on-line.com/dreemhanter/))
+[رابط التطبيق المباشر]([https://www.ps-on-line.com/dreemhanter/screenshot.png](https://www.ps-on-line.com/dreemhanter/))
 
