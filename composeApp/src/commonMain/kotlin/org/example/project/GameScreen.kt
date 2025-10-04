@@ -71,15 +71,17 @@ fun GameScreen(
             title = { 
                 Text(
                     text = "🎊 مبروك!",
-                    style = MaterialTheme.typography.headlineSmall
+                    style = MaterialTheme.typography.headlineSmall,
+                    fontFamily = MyFont.fontFamily
                 )
             },
             text = { 
-                Text("لقد فتحت قوة خارقة جديدة!\n'وَمَا تَدْرِي نَفْسٌ مَّاذَا تَكْسِبُ غَداً'") 
+                Text("لقد فتحت قوة خارقة جديدة!\n'وَمَا تَدْرِي نَفْسٌ مَّاذَا تَكْسِبُ غَداً'",fontFamily = MyFont.fontFamily)
             },
             confirmButton = {
                 Button(onClick = { showCongratulations.value = false }) {
-                    Text("استمرار")
+                    Text("استمرار",
+                        fontFamily = MyFont.fontFamily)
                 }
             }
         )
@@ -110,7 +112,8 @@ fun GameTopBar(player: Player) {
             text = "صائد الأحلام الذكي 🎮",
             style = MaterialTheme.typography.headlineSmall,
             color = Color.White,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            fontFamily = MyFont.fontFamily
         )
         
         Spacer(modifier = Modifier.height(8.dp))
@@ -123,12 +126,14 @@ fun GameTopBar(player: Player) {
                 Text(
                     text = player.name,
                     style = MaterialTheme.typography.titleLarge,
-                    color = Color.White
+                    color = Color.White,
+                    fontFamily = MyFont.fontFamily
                 )
                 Text(
                     text = "المستوى: ${player.level}",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.White.copy(alpha = 0.8f)
+                    color = Color.White.copy(alpha = 0.8f),
+                    fontFamily = MyFont.fontFamily
                 )
             }
             
@@ -136,12 +141,14 @@ fun GameTopBar(player: Player) {
                 Text(
                     text = "${player.dreamPoints} نقطة",
                     style = MaterialTheme.typography.titleLarge,
-                    color = Color.White
+                    color = Color.White,
+                    fontFamily = MyFont.fontFamily
                 )
                 Text(
                     text = "${player.strengthBalls.size}/10 كرات",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.White.copy(alpha = 0.8f)
+                    color = Color.White.copy(alpha = 0.8f),
+                    fontFamily = MyFont.fontFamily
                 )
             }
         }
@@ -165,7 +172,8 @@ fun GameContent(
             Text(
                 text = "مهام اليوم 🎯",
                 style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(bottom = 16.dp)
+                modifier = Modifier.padding(bottom = 16.dp),
+                fontFamily = MyFont.fontFamily
             )
         }
         
@@ -183,11 +191,12 @@ fun GameContent(
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3))
             ) {
-                Text(text = "مهمة جديدة 🎉")
+                Text(text = "مهمة جديدة 🎉",
+                    fontFamily = MyFont.fontFamily)
             }
             Spacer(modifier = Modifier.height(16.dp))
         }
-        
+
         item {
             if (player.unlockedPowers.isNotEmpty()) {
                 SuperPowersSection(powers = player.unlockedPowers)
@@ -202,7 +211,8 @@ fun StrengthBallsSection(balls: List<BallColor>) {
         Text(
             text = "كرات القوة الخاصة بك:",
             style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.padding(bottom = 8.dp)
+            modifier = Modifier.padding(bottom = 8.dp),
+            fontFamily = MyFont.fontFamily
         )
         
         LazyVerticalGrid(
@@ -220,7 +230,8 @@ fun StrengthBallsSection(balls: List<BallColor>) {
                 text = "🎉 تقريباً وصلت! ${10 - balls.size} كرات متبقية لفتح قوة خارقة!",
                 color = Color(0xFFFF9800),
                 style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(top = 8.dp)
+                modifier = Modifier.padding(top = 8.dp),
+                fontFamily = MyFont.fontFamily
             )
         }
         
@@ -270,12 +281,14 @@ fun TaskCard(task: GameTask, onComplete: () -> Unit) {
                     Text(
                         text = task.title,
                         style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = MyFont.fontFamily
                     )
                     Text(
                         text = task.description,
                         style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(top = 4.dp)
+                        modifier = Modifier.padding(top = 4.dp),
+                        fontFamily = MyFont.fontFamily
                     )
                 }
                 
@@ -290,7 +303,8 @@ fun TaskCard(task: GameTask, onComplete: () -> Unit) {
                             }
                         )
                     ) {
-                        Text("أكمل")
+                        Text("أكمل",
+                            fontFamily = MyFont.fontFamily)
                     }
                 } else {
                     Icon(
@@ -307,7 +321,8 @@ fun TaskCard(task: GameTask, onComplete: () -> Unit) {
                     text = "مكتملة ✅ +${task.points} نقطة",
                     color = Color(0xFF4CAF50),
                     style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(top = 8.dp)
+                    modifier = Modifier.padding(top = 8.dp),
+                    fontFamily = MyFont.fontFamily
                 )
             }
         }
@@ -328,7 +343,8 @@ fun SuperPowersSection(powers: List<SuperPower>) {
                 text = "🌟 قواك الخارقة المفتوحة",
                 style = MaterialTheme.typography.titleLarge,
                 color = Color(0xFFF57C00),
-                modifier = Modifier.padding(bottom = 12.dp)
+                modifier = Modifier.padding(bottom = 12.dp),
+                fontFamily = MyFont.fontFamily
             )
             
             powers.forEach { power ->
@@ -361,12 +377,14 @@ fun SuperPowerItem(power: SuperPower) {
                 text = power.name,
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFFF57C00)
+                color = Color(0xFFF57C00),
+                fontFamily = MyFont.fontFamily
             )
             Text(
                 text = power.description,
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color(0xFF757575)
+                color = Color(0xFF757575),
+                fontFamily = MyFont.fontFamily
             )
         }
     }
