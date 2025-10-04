@@ -28,6 +28,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,6 +40,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -48,6 +50,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 // GameScreen.kt
 @Composable
 fun GameScreen(
+    fontFamily: FontFamily?=null,
     viewModel: GameViewModel = viewModel { GameViewModel(DreamHunterGame()) }
         //GameViewModel(DreamHunterGame())
 
@@ -72,36 +75,38 @@ fun GameScreen(
                 Text(
                     text = "🎊 مبروك!",
                     style = MaterialTheme.typography.headlineSmall,
-                    fontFamily = MyFont.fontFamily
+                    fontFamily = fontFamily
                 )
             },
             text = { 
-                Text("لقد فتحت قوة خارقة جديدة!\n'وَمَا تَدْرِي نَفْسٌ مَّاذَا تَكْسِبُ غَداً'",fontFamily = MyFont.fontFamily)
+                Text("لقد فتحت قوة خارقة جديدة!\n'وَمَا تَدْرِي نَفْسٌ مَّاذَا تَكْسِبُ غَداً'",fontFamily = fontFamily)
             },
             confirmButton = {
                 Button(onClick = { showCongratulations.value = false }) {
                     Text("استمرار",
-                        fontFamily = MyFont.fontFamily)
+                        fontFamily = fontFamily)
                 }
             }
         )
     }
     
     Scaffold(
-        topBar = { GameTopBar(playerState) },
+        topBar = { GameTopBar(playerState,fontFamily) },
         content = { padding ->
             GameContent(
                 player = playerState,
                 onTaskComplete = { taskId -> viewModel.completeTask(taskId) },
                 onNewTask = { viewModel.generateNewTasks() },
-                modifier = Modifier.padding(padding)
+                modifier = Modifier.padding(padding),
+                fontFamily = fontFamily
+
             )
         }
     )
 }
 
 @Composable
-fun GameTopBar(player: Player) {
+fun GameTopBar(player: Player,fontFamily: FontFamily?=null) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -109,11 +114,11 @@ fun GameTopBar(player: Player) {
             .padding(16.dp)
     ) {
         Text(
-            text = "صائد الأحلام الذكي 🎮",
+            text = "صائد الأحلام الذكي ",
             style = MaterialTheme.typography.headlineSmall,
             color = Color.White,
             fontWeight = FontWeight.Bold,
-            fontFamily = MyFont.fontFamily
+            fontFamily = fontFamily
         )
         
         Spacer(modifier = Modifier.height(8.dp))
@@ -127,13 +132,13 @@ fun GameTopBar(player: Player) {
                     text = player.name,
                     style = MaterialTheme.typography.titleLarge,
                     color = Color.White,
-                    fontFamily = MyFont.fontFamily
+                    fontFamily = fontFamily
                 )
                 Text(
                     text = "المستوى: ${player.level}",
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White.copy(alpha = 0.8f),
-                    fontFamily = MyFont.fontFamily
+                    fontFamily = fontFamily
                 )
             }
             
@@ -142,13 +147,13 @@ fun GameTopBar(player: Player) {
                     text = "${player.dreamPoints} نقطة",
                     style = MaterialTheme.typography.titleLarge,
                     color = Color.White,
-                    fontFamily = MyFont.fontFamily
+                    fontFamily = fontFamily
                 )
                 Text(
                     text = "${player.strengthBalls.size}/10 كرات",
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White.copy(alpha = 0.8f),
-                    fontFamily = MyFont.fontFamily
+                    fontFamily = fontFamily
                 )
             }
         }
@@ -160,12 +165,14 @@ fun GameContent(
     player: Player,
     onTaskComplete: (String) -> Unit,
     onNewTask: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    fontFamily: FontFamily?=null
 ) {
     LazyColumn(modifier = modifier.padding(16.dp)) {
         item {
-            StrengthBallsSection(balls = player.strengthBalls)
+            StrengthBallsSection(balls = player.strengthBalls,fontFamily=fontFamily)
             Spacer(modifier = Modifier.height(24.dp))
+
         }
         
         item {
@@ -173,7 +180,7 @@ fun GameContent(
                 text = "مهام اليوم 🎯",
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.padding(bottom = 16.dp),
-                fontFamily = MyFont.fontFamily
+                fontFamily = fontFamily
             )
         }
         
@@ -181,6 +188,7 @@ fun GameContent(
             TaskCard(
                 task = task,
                 onComplete = { onTaskComplete(task.id) }
+                ,fontFamily=fontFamily
             )
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -192,27 +200,27 @@ fun GameContent(
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3))
             ) {
                 Text(text = "مهمة جديدة 🎉",
-                    fontFamily = MyFont.fontFamily)
+                    fontFamily = fontFamily)
             }
             Spacer(modifier = Modifier.height(16.dp))
         }
 
         item {
             if (player.unlockedPowers.isNotEmpty()) {
-                SuperPowersSection(powers = player.unlockedPowers)
+                SuperPowersSection(powers = player.unlockedPowers,fontFamily=fontFamily)
             }
         }
     }
 }
 
 @Composable
-fun StrengthBallsSection(balls: List<BallColor>) {
+fun StrengthBallsSection(balls: List<BallColor>, fontFamily: FontFamily?) {
     Column {
         Text(
             text = "كرات القوة الخاصة بك:",
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier.padding(bottom = 8.dp),
-            fontFamily = MyFont.fontFamily
+            fontFamily = fontFamily
         )
         
         LazyVerticalGrid(
@@ -231,17 +239,19 @@ fun StrengthBallsSection(balls: List<BallColor>) {
                 color = Color(0xFFFF9800),
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(top = 8.dp),
-                fontFamily = MyFont.fontFamily
+                fontFamily = fontFamily
             )
         }
-        
+
         LinearProgressIndicator(
-            progress = balls.size / 10f,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(8.dp)
-                .padding(top = 8.dp),
-            color = Color(0xFFFF9800)
+        progress = { balls.size / 10f },
+        modifier = Modifier
+                        .fillMaxWidth()
+                        .height(8.dp)
+                        .padding(top = 8.dp),
+        color = Color(0xFFFF9800),
+        trackColor = ProgressIndicatorDefaults.linearTrackColor,
+        strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
         )
     }
 }
@@ -266,7 +276,7 @@ fun BallItem(color: BallColor?) {
 }
 
 @Composable
-fun TaskCard(task: GameTask, onComplete: () -> Unit) {
+fun TaskCard(task: GameTask, onComplete: () -> Unit, fontFamily: FontFamily?) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier.fillMaxWidth()
@@ -282,13 +292,13 @@ fun TaskCard(task: GameTask, onComplete: () -> Unit) {
                         text = task.title,
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
-                        fontFamily = MyFont.fontFamily
+                        fontFamily = fontFamily
                     )
                     Text(
                         text = task.description,
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.padding(top = 4.dp),
-                        fontFamily = MyFont.fontFamily
+                        fontFamily = fontFamily
                     )
                 }
                 
@@ -304,7 +314,7 @@ fun TaskCard(task: GameTask, onComplete: () -> Unit) {
                         )
                     ) {
                         Text("أكمل",
-                            fontFamily = MyFont.fontFamily)
+                            fontFamily = fontFamily)
                     }
                 } else {
                     Icon(
@@ -322,7 +332,7 @@ fun TaskCard(task: GameTask, onComplete: () -> Unit) {
                     color = Color(0xFF4CAF50),
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(top = 8.dp),
-                    fontFamily = MyFont.fontFamily
+                    fontFamily = fontFamily
                 )
             }
         }
@@ -330,7 +340,7 @@ fun TaskCard(task: GameTask, onComplete: () -> Unit) {
 }
 
 @Composable
-fun SuperPowersSection(powers: List<SuperPower>) {
+fun SuperPowersSection(powers: List<SuperPower>, fontFamily: FontFamily?) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier
@@ -344,11 +354,11 @@ fun SuperPowersSection(powers: List<SuperPower>) {
                 style = MaterialTheme.typography.titleLarge,
                 color = Color(0xFFF57C00),
                 modifier = Modifier.padding(bottom = 12.dp),
-                fontFamily = MyFont.fontFamily
+                fontFamily = fontFamily
             )
             
             powers.forEach { power ->
-                SuperPowerItem(power = power)
+                SuperPowerItem(power = power, fontFamily = fontFamily)
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
@@ -356,7 +366,7 @@ fun SuperPowersSection(powers: List<SuperPower>) {
 }
 
 @Composable
-fun SuperPowerItem(power: SuperPower) {
+fun SuperPowerItem(power: SuperPower, fontFamily: FontFamily?) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -378,13 +388,13 @@ fun SuperPowerItem(power: SuperPower) {
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFFF57C00),
-                fontFamily = MyFont.fontFamily
+                fontFamily = fontFamily
             )
             Text(
                 text = power.description,
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color(0xFF757575),
-                fontFamily = MyFont.fontFamily
+                fontFamily = fontFamily
             )
         }
     }
