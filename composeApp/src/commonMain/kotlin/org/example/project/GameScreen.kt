@@ -50,7 +50,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 // GameScreen.kt
 @Composable
 fun GameScreen(
-    fontFamily: FontFamily?=null,
     viewModel: GameViewModel = viewModel { GameViewModel(DreamHunterGame()) }
         //GameViewModel(DreamHunterGame())
 
@@ -75,38 +74,34 @@ fun GameScreen(
                 Text(
                     text = "🎊 مبروك!",
                     style = MaterialTheme.typography.headlineSmall,
-                    fontFamily = fontFamily
                 )
             },
             text = { 
-                Text("لقد فتحت قوة خارقة جديدة!\n'وَمَا تَدْرِي نَفْسٌ مَّاذَا تَكْسِبُ غَداً'",fontFamily = fontFamily)
+                Text("لقد فتحت قوة خارقة جديدة!\n'وَمَا تَدْرِي نَفْسٌ مَّاذَا تَكْسِبُ غَداً'")
             },
             confirmButton = {
                 Button(onClick = { showCongratulations.value = false }) {
-                    Text("استمرار",
-                        fontFamily = fontFamily)
+                    Text("استمرار")
                 }
             }
         )
     }
     
     Scaffold(
-        topBar = { GameTopBar(playerState,fontFamily) },
+        topBar = { GameTopBar(playerState) },
         content = { padding ->
             GameContent(
                 player = playerState,
                 onTaskComplete = { taskId -> viewModel.completeTask(taskId) },
                 onNewTask = { viewModel.generateNewTasks() },
-                modifier = Modifier.padding(padding),
-                fontFamily = fontFamily
-
+                modifier = Modifier.padding(padding)
             )
         }
     )
 }
 
 @Composable
-fun GameTopBar(player: Player,fontFamily: FontFamily?=null) {
+fun GameTopBar(player: Player) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -117,8 +112,7 @@ fun GameTopBar(player: Player,fontFamily: FontFamily?=null) {
             text = "صائد الأحلام الذكي ",
             style = MaterialTheme.typography.headlineSmall,
             color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontFamily = fontFamily
+            fontWeight = FontWeight.Bold
         )
         
         Spacer(modifier = Modifier.height(8.dp))
@@ -131,14 +125,12 @@ fun GameTopBar(player: Player,fontFamily: FontFamily?=null) {
                 Text(
                     text = player.name,
                     style = MaterialTheme.typography.titleLarge,
-                    color = Color.White,
-                    fontFamily = fontFamily
+                    color = Color.White
                 )
                 Text(
                     text = "المستوى: ${player.level}",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.White.copy(alpha = 0.8f),
-                    fontFamily = fontFamily
+                    color = Color.White.copy(alpha = 0.8f)
                 )
             }
             
@@ -146,14 +138,12 @@ fun GameTopBar(player: Player,fontFamily: FontFamily?=null) {
                 Text(
                     text = "${player.dreamPoints} نقطة",
                     style = MaterialTheme.typography.titleLarge,
-                    color = Color.White,
-                    fontFamily = fontFamily
+                    color = Color.White
                 )
                 Text(
                     text = "${player.strengthBalls.size}/10 كرات",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color.White.copy(alpha = 0.8f),
-                    fontFamily = fontFamily
+                    color = Color.White.copy(alpha = 0.8f)
                 )
             }
         }
