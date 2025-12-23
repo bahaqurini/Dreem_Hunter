@@ -27,4 +27,4 @@ A cross-platform app that allows users to track and analyze their dreams easily,
 ---
 
 ## 🌐 تجربة مباشرة | Live Demo
-[جرب التطبيق مباشرة](https://codepathpro.com/dreemhanter/) | [Try it online](https://codepathprp.com/dreemhanter/)
+[جرب التطبيق مباشرة](https://codepathpro.com/dreemhanter/) | [Try it online](https://codepathpro.com/dreemhanter/)
