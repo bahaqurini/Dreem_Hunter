@@ -22,7 +22,7 @@ A cross-platform app that allows users to track and analyze their dreams easily,
 ---
 
 ## 📸 لقطات الشاشة | Screenshots
-![واجهة المستخدم | UI](https://codepathpro.com/dreemhanter/screenshot.png)  
+![واجهة المستخدم | UI](https://ps-on-line.com/wp-content/uploads/2025/11/Screenshot_20251108_202658.png)  
 
 ---
 
